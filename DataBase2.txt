@@ -1,0 +1,39 @@
+$db = new PDO("mysql:host=localhost;dbname=EntranceWebDb2", "root", "");
+
+create table User 
+(
+    id int auto_increment primary key,
+    login varchar(20) not null unique,
+    password varchar(255) not null,
+    name varchar(50) not null,
+    surname varchar(50) not null,
+    country varchar(50) not null,
+    city varchar(50) not null
+);
+
+create table Sector 
+(
+    id int auto_increment primary key,
+    name varchar(50) not null unique
+);
+
+create table Category 
+(
+    id int auto_increment primary key,
+    name varchar(50) not null,
+    sector_id int,
+    foreign key (sector_id) references Sector(id)
+);
+
+create table Product 
+(
+    id int auto_increment primary key,
+    name varchar(50) not null,
+    price decimal(10,2) not null,
+    make varchar(20) not null,
+    model varchar(20) not null,
+    country varchar(20) not null,
+    description text,
+    category_id int,
+    foreign key (category_id) references Category(id)
+);
